@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024.11.16 19:03:23.466.bdsproj,C:\Users\user\Documents\Borland Studio Projects\Project1.bdsproj=C:\Users\user\Documents\Borland Studio Projects\Checks.bdsproj</Transaction>
+    <Transaction>2024.11.16 19:03:54.704.bdsproj,C:\Users\user\Documents\Borland Studio Projects\Checks.bdsproj=C:\Users\user\Documents\Borland Studio Projects\Checkers.bdsproj</Transaction>
+    <Transaction>2024.11.16 21:41:24.522.cpp,C:\Users\user\Documents\Borland Studio Projects\Unit1.cpp=C:\Users\user\Documents\Borland Studio Projects\MainMenu.cpp</Transaction>
+    <Transaction>2024.11.16 21:41:24.522.h,C:\Users\user\Documents\Borland Studio Projects\Unit1.h=C:\Users\user\Documents\Borland Studio Projects\MainMenu.h</Transaction>
+    <Transaction>2024.11.16 21:41:24.522.dfm,C:\Users\user\Documents\Borland Studio Projects\Unit1.dfm=C:\Users\user\Documents\Borland Studio Projects\MainMenu.dfm</Transaction>
+    <Transaction>2024.11.16 21:43:07.671.cpp,C:\Users\user\Documents\Borland Studio Projects\Unit1.cpp=C:\Users\user\Documents\Borland Studio Projects\About.cpp</Transaction>
+    <Transaction>2024.11.16 21:43:07.671.h,C:\Users\user\Documents\Borland Studio Projects\Unit1.h=C:\Users\user\Documents\Borland Studio Projects\About.h</Transaction>
+    <Transaction>2024.11.16 21:59:42.579.cpp,C:\Users\user\Documents\Borland Studio Projects\Unit2.cpp=C:\Users\user\Documents\Borland Studio Projects\Game.cpp</Transaction>
+    <Transaction>2024.11.16 21:59:42.579.h,C:\Users\user\Documents\Borland Studio Projects\Unit2.h=C:\Users\user\Documents\Borland Studio Projects\Game.h</Transaction>
+    <Transaction>2024.11.16 21:59:42.579.dfm,C:\Users\user\Documents\Borland Studio Projects\Unit2.dfm=C:\Users\user\Documents\Borland Studio Projects\Game.dfm</Transaction>
+    <Transaction>2024.11.16 22:29:50.498.cpp,C:\Users\user\Documents\Borland Studio Projects\File1.cpp=C:\Users\user\Documents\Borland Studio Projects\Utils.cpp</Transaction>
+    <Transaction>2024.11.16 22:34:00.314.cpp,C:\Users\user\Documents\Borland Studio Projects\Game.cpp=C:\Users\user\Documents\Borland Studio Projects\NewGame.cpp</Transaction>
+    <Transaction>2024.11.16 22:34:00.314.h,C:\Users\user\Documents\Borland Studio Projects\Game.h=C:\Users\user\Documents\Borland Studio Projects\NewGame.h</Transaction>
+    <Transaction>2024.11.16 22:34:00.314.dfm,C:\Users\user\Documents\Borland Studio Projects\Game.dfm=C:\Users\user\Documents\Borland Studio Projects\NewGame.dfm</Transaction>
+    <Transaction>2024.11.16 22:34:07.171.cpp,C:\Users\user\Documents\Borland Studio Projects\Unit1.cpp=C:\Users\user\Documents\Borland Studio Projects\Game.cpp</Transaction>
+    <Transaction>2024.11.16 22:34:07.171.h,C:\Users\user\Documents\Borland Studio Projects\Unit1.h=C:\Users\user\Documents\Borland Studio Projects\Game.h</Transaction>
+    <Transaction>2024.11.16 22:34:17.150.cpp,C:\Users\user\Documents\Borland Studio Projects\NewGame.cpp=C:\Users\user\Documents\Borland Studio Projects\NewGameMenu.cpp</Transaction>
+    <Transaction>2024.11.16 22:34:17.150.h,C:\Users\user\Documents\Borland Studio Projects\NewGame.h=C:\Users\user\Documents\Borland Studio Projects\NewGameMenu.h</Transaction>
+    <Transaction>2024.11.16 22:34:17.150.dfm,C:\Users\user\Documents\Borland Studio Projects\NewGame.dfm=C:\Users\user\Documents\Borland Studio Projects\NewGameMenu.dfm</Transaction>
+    <Transaction>2024.11.16 22:34:22.423.cpp,C:\Users\user\Documents\Borland Studio Projects\Game.cpp=C:\Users\user\Documents\Borland Studio Projects\GameMenu.cpp</Transaction>
+    <Transaction>2024.11.16 22:34:22.423.h,C:\Users\user\Documents\Borland Studio Projects\Game.h=C:\Users\user\Documents\Borland Studio Projects\GameMenu.h</Transaction>
+    <Transaction>2024.11.16 22:37:36.758.cpp,C:\Users\user\Documents\Borland Studio Projects\Utils.cpp=C:\Users\user\Documents\Borland Studio Projects\Utils.cpp</Transaction>
+    <Transaction>2024.11.16 22:44:57.421.cpp,C:\Users\user\Documents\Borland Studio Projects\Unit1.cpp=C:\Users\user\Documents\Borland Studio Projects\Logic.cpp</Transaction>
+    <Transaction>2024.11.16 22:44:57.421.h,C:\Users\user\Documents\Borland Studio Projects\Unit1.h=C:\Users\user\Documents\Borland Studio Projects\Logic.h</Transaction>
+    <Transaction>2024.11.17 01:38:28.546.cpp,C:\Users\user\Documents\Borland Studio Projects\Unit3.cpp=C:\Users\user\Documents\Borland Studio Projects\GameWindow.cpp</Transaction>
+    <Transaction>2024.11.17 01:38:28.546.h,C:\Users\user\Documents\Borland Studio Projects\Unit3.h=C:\Users\user\Documents\Borland Studio Projects\GameWindow.h</Transaction>
+    <Transaction>2024.11.17 01:38:28.546.dfm,C:\Users\user\Documents\Borland Studio Projects\Unit3.dfm=C:\Users\user\Documents\Borland Studio Projects\GameWindow.dfm</Transaction>
+    <Transaction>2024.11.17 01:48:51.911.cpp,C:\Users\user\Documents\Borland Studio Projects\GameWindow.cpp=C:\Users\user\Desktop\VPCourseWork\GameWindow.cpp</Transaction>
+    <Transaction>2024.11.17 01:48:51.911.h,C:\Users\user\Documents\Borland Studio Projects\GameWindow.h=C:\Users\user\Desktop\VPCourseWork\GameWindow.h</Transaction>
+    <Transaction>2024.11.17 01:48:51.911.dfm,C:\Users\user\Documents\Borland Studio Projects\GameWindow.dfm=C:\Users\user\Desktop\VPCourseWork\GameWindow.dfm</Transaction>
+    <Transaction>2024.11.17 01:48:53.231.cpp,C:\Users\user\Documents\Borland Studio Projects\NewGameMenu.cpp=C:\Users\user\Desktop\VPCourseWork\NewGameMenu.cpp</Transaction>
+    <Transaction>2024.11.17 01:48:53.231.h,C:\Users\user\Documents\Borland Studio Projects\NewGameMenu.h=C:\Users\user\Desktop\VPCourseWork\NewGameMenu.h</Transaction>
+    <Transaction>2024.11.17 01:48:53.231.dfm,C:\Users\user\Documents\Borland Studio Projects\NewGameMenu.dfm=C:\Users\user\Desktop\VPCourseWork\NewGameMenu.dfm</Transaction>
+    <Transaction>2024.11.17 01:48:54.344.cpp,C:\Users\user\Documents\Borland Studio Projects\Logic.cpp=C:\Users\user\Desktop\VPCourseWork\Logic.cpp</Transaction>
+    <Transaction>2024.11.17 01:48:54.344.h,C:\Users\user\Documents\Borland Studio Projects\Logic.h=C:\Users\user\Desktop\VPCourseWork\Logic.h</Transaction>
+    <Transaction>2024.11.17 01:48:55.535.cpp,C:\Users\user\Documents\Borland Studio Projects\MainMenu.cpp=C:\Users\user\Desktop\VPCourseWork\MainMenu.cpp</Transaction>
+    <Transaction>2024.11.17 01:48:55.535.h,C:\Users\user\Documents\Borland Studio Projects\MainMenu.h=C:\Users\user\Desktop\VPCourseWork\MainMenu.h</Transaction>
+    <Transaction>2024.11.17 01:48:55.535.dfm,C:\Users\user\Documents\Borland Studio Projects\MainMenu.dfm=C:\Users\user\Desktop\VPCourseWork\MainMenu.dfm</Transaction>
+    <Transaction>2024.11.17 01:48:56.674.cpp,C:\Users\user\Documents\Borland Studio Projects\ABOUT.cpp=C:\Users\user\Desktop\VPCourseWork\ABOUT.cpp</Transaction>
+    <Transaction>2024.11.17 01:48:56.674.h,C:\Users\user\Documents\Borland Studio Projects\ABOUT.h=C:\Users\user\Desktop\VPCourseWork\ABOUT.h</Transaction>
+    <Transaction>2024.11.17 01:48:56.674.dfm,C:\Users\user\Documents\Borland Studio Projects\ABOUT.dfm=C:\Users\user\Desktop\VPCourseWork\ABOUT.dfm</Transaction>
+    <Transaction>2024.11.17 01:48:57.889.bdsproj,C:\Users\user\Documents\Borland Studio Projects\Checkers.bdsproj=C:\Users\user\Desktop\VPCourseWork\Checkers.bdsproj</Transaction>
+    <Transaction>2024.11.24 21:21:40.095.cpp,C:\Users\user\Desktop\VPCourseWork\Unit4.cpp=C:\Users\user\Desktop\VPCourseWork\Rules.cpp</Transaction>
+    <Transaction>2024.11.24 21:21:40.095.h,C:\Users\user\Desktop\VPCourseWork\Unit4.h=C:\Users\user\Desktop\VPCourseWork\Rules.h</Transaction>
+    <Transaction>2024.11.24 21:21:40.095.dfm,C:\Users\user\Desktop\VPCourseWork\Unit4.dfm=C:\Users\user\Desktop\VPCourseWork\Rules.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
