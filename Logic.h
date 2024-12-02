@@ -23,7 +23,8 @@ class Logic {
 	private:
 	  int timer;
 	  bool isPieceUnderAttack(int x, int y, short color);
-
+	  bool isAnyPieceUnderAttackAndHasMoves(short color);
+	  bool hasMoves(int x, int y, short color);
 	  std::pair<int, int> matrix[8][8]; // pair color and id of figure
 	  std::vector<std::pair<int,int> > black_cords;
 	  std::vector<std::pair<int, int> > white_cords;
