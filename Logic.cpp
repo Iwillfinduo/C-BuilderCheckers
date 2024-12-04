@@ -36,9 +36,9 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 		if (x != -1) break; // Если нашли координаты, выходим из цикла
 	}
 	// Проверка на нахождение под боем
-	if (this->isAnyPieceUnderAttackAndHasMoves(color) && !this->isPieceUnderAttack(x, y, color)) {
-		return moves;
-	}
+	// if (this->isAnyPieceUnderAttackAndHasMoves(color) && !this->isPieceUnderAttack(x, y, color)) {
+	//	return moves;
+	//}
 
 	// Проверка на корректность найденных координат
     if (x == -1 || y == -1) {
@@ -53,11 +53,13 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 		{-1, -1}, {-1, 1}, {1, -1}, {1, 1}
 	};
 
+	std::vector<std::pair<int, int> > kill_moves;
 	if (isKing) {
 
 	} else {
 		// Логика для обычной пешки
 		int direction = (color == 1) ? -1 : 1; // Направление движения: белые вверх, черные вниз
+		// Проверка хода вперед
 		for (int i = 0; i < 2; i++) {
 			int dx = directions[i + (direction > 0 ? 2 : 0)][1];
 			int nx = x + direction, ny = y + dx;
@@ -70,13 +72,34 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 					// Проверка возможности прыжка через противника
 					int nnx = nx + direction, nny = ny + dx;
 					if (nnx >= 0 && nnx < 8 && nny >= 0 && nny < 8 && this->matrix[nnx][nny].first == 0) {
-						moves.push_back(std::make_pair(nnx, nny));
+						kill_moves.push_back(std::make_pair(nnx, nny));
+					}
+				}
+			}
+		}
+		// Проверка прыжка через противника назад
+		for (int i = 0; i < 2; i++) {
+			int dx = directions[i + (direction > 0 ? 0 : 2)][1];
+			int nx = x - direction, ny = y + dx;
+			// Проверка на границы поля
+			if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8) {
+				if (this->matrix[nx][ny].first != color && this->matrix[nx][ny].first != 0) {
+					// Проверка возможности прыжка через противника
+					int nnx = nx - direction, nny = ny + dx;
+					if (nnx >= 0 && nnx < 8 && nny >= 0 && nny < 8 && this->matrix[nnx][nny].first == 0) {
+						kill_moves.push_back(std::make_pair(nnx, nny));
 					}
 				}
 			}
 		}
 	}
+	if (kill_moves.size() != 0) {
 
+		this->is_last_kill_moves = true;
+		return kill_moves;
+
+	}
+	this->is_last_kill_moves = false;
 	return moves;
 };
 //---------------------------------------------------------------------------
@@ -139,9 +162,10 @@ std::pair<int, std::pair<int, int> > Logic::ReadMove(short color, short index, s
 	int dy = (place_j - y) / 2;
 	std::pair<int, std::pair<int, int> > output_pair;
 	output_pair.second = std::pair<int, int>(-1, -1);
-
 	// Проверка прыжка через шашку
+	bool is_attack = false;
 	if (abs(dx) == 1 && abs(dy) == 1) { // Прыжок через шашку
+		is_attack = true;
         int mid_x = x + dx;
 		int mid_y = y + dy;
 
@@ -155,26 +179,6 @@ std::pair<int, std::pair<int, int> > Logic::ReadMove(short color, short index, s
 			output_pair.second = std::pair<int, int>(this->matrix[mid_x][mid_y].first, this->matrix[mid_x][mid_y].second);
 			this->matrix[mid_x][mid_y] = std::pair<int, int>(0, -1); // Убираем фигуру противника с доски
 		}
-		// Проверка можно ли прыгнуть через еще одну шашку
-		moves = this->GetMoves(color, index);
-
-    	// Получаем текущие координаты шашки, которая движется
-		int x = this->last_i;
-		int y = this->last_j;
-
-		// Проверяем, был ли это прыжок через шашку противника
-		int dx = (place_i - x) / 2;
-		int dy = (place_j - y) / 2;
-		std::pair<int, std::pair<int, int> > output_pair;
-		output_pair.second = std::pair<int, int>(-1, -1);
-
-		// Проверка прыжка через шашку
-		if (abs(dx) == 1 && abs(dy) == 1) {
-			this->is_extra_move = true;
-			this->piece_with_extra_move = std::pair<int,int>(color, index);
-		} else {
-			this->is_extra_move = false;
-        }
 	}
 
 	// Перемещаем шашку на целевое поле
@@ -188,6 +192,16 @@ std::pair<int, std::pair<int, int> > Logic::ReadMove(short color, short index, s
 		this->matrix[place_i][place_j].first = (color == 1) ? 3 : 4; // Сделать дамкой
 	} else {
 	   output_pair.first = true; // состояние простого успешного хода
+	}
+	if (is_attack) {
+		// Проверка можно ли прыгнуть через еще одну шашку
+		moves = this->GetMoves(color, index);
+		if (this->is_last_kill_moves) {
+			this->is_extra_move = true;
+			this->piece_with_extra_move = std::pair<int,int>(color, index);
+		} else {
+			this->is_extra_move = false;
+		}
 	}
 
 	// Меняем очередь ходов
@@ -224,9 +238,14 @@ bool Logic::isPieceUnderAttack(int x, int y, short color) {
 	 // Направления для проверки: по диагоналям (вверх-влево, вверх-вправо, вниз-влево, вниз-вправо)
 	const int directions[4][2] = {
 		{-1, -1}, {-1, 1},  // вверх-влево, вверх-вправо
-        {1, -1}, {1, 1}     // вниз-влево, вниз-вправо
+		{1, -1}, {1, 1}     // вниз-влево, вниз-вправо
 	};
-
+	const int black_attack_directions[2][2] = {
+			{-1, -1}, {-1, 1}
+		};
+	const int white_attack_directions[2][2] = {
+			{1, -1}, {1, 1}
+		};
 	int dx = 1, dy = 1;
 	bool directions_stop[4] = {false, false, false, false};
 	while(dx <= 7 && dy <= 7) {
@@ -259,10 +278,20 @@ bool Logic::isPieceUnderAttack(int x, int y, short color) {
 				if ((nx < 0 || nx >= 8 || ny < 0 || ny >= 8) ||
 				  (this->matrix[nx][ny].first != 0 ||
 				  this->matrix[nx][ny].first != 0)) {
-                	if(abs(dx) == 1 && abs(dy) == 1 &&
+					if(abs(dx) == 1 && abs(dy) == 1 &&
 					 (this->matrix[nx][ny].first == opponent ||
 					 this->matrix[nx][ny].first == opponentKing)) {
-						return true;
+						if (this->matrix[nx][ny].first == 1 &&
+						 (d == 2 || d == 3)) {
+							return true;
+						} else if (this->matrix[nx][ny].first == 2 &&
+						 (d == 0 || d == 1)) {
+							return true;
+						} else if (this->matrix[nx][ny].first == 3 ||
+						 this->matrix[nx][ny].first == 4) {
+							return true;
+						}
+
 					} else if(this->matrix[nx][ny].first == opponentKing) {
 						return true;
 					}
@@ -326,6 +355,21 @@ bool Logic::hasMoves(int x, int y, short color) {
 				} else if (this->matrix[nx][ny].first != color) {
 					// Проверка возможности прыжка через противника
 					int nnx = nx + direction, nny = ny + dx;
+					if (nnx >= 0 && nnx < 8 && nny >= 0 && nny < 8 && this->matrix[nnx][nny].first == 0) {
+						return true;
+					}
+				}
+			}
+		}
+        // Проверка прыжка через противника назад
+		for (int i = 0; i < 2; i++) {
+			int dx = directions[i + (direction > 0 ? 0 : 2)][1];
+			int nx = x - direction, ny = y + dx;
+			// Проверка на границы поля
+			if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8) {
+				if (this->matrix[nx][ny].first != color && this->matrix[nx][ny].first != 0) {
+					// Проверка возможности прыжка через противника
+					int nnx = nx - direction, nny = ny + dx;
 					if (nnx >= 0 && nnx < 8 && nny >= 0 && nny < 8 && this->matrix[nnx][nny].first == 0) {
 						return true;
 					}
