@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+п»ї//---------------------------------------------------------------------------
 
 
 #pragma hdrstop
@@ -17,7 +17,8 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 	}
 
     // Проверка на корректность хода данного цвета
-    if (!this->is_it_your_move(color)) {
+	if (!this->is_it_your_move(color)) {
+        this->is_last_kill_moves = false;
 		return moves;
 	}
 
@@ -35,27 +36,105 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 		}
 		if (x != -1) break; // Если нашли координаты, выходим из цикла
 	}
-	// Проверка на нахождение под боем
-	// if (this->isAnyPieceUnderAttackAndHasMoves(color) && !this->isPieceUnderAttack(x, y, color)) {
-	//	return moves;
-	//}
+	bool is_opponent_under_attack = false;
+	// Проверка на нахождение под боем какой либо шашки
+	if (this->isAnyPieceUnderAttackAndHasMoves((color == 1 || color == 3) ? 2 : 1)) {
+		is_opponent_under_attack = true;
+	}
 
 	// Проверка на корректность найденных координат
-    if (x == -1 || y == -1) {
-        return moves; // Фигура не найдена
-    }
+	if (x == -1 || y == -1) {
+	  this->is_last_kill_moves = false;
+	  return moves; // Фигура не найдена
+	}
 
 	// Проверка на дамку
 	bool isKing = (color == 3 || color == 4);
-
 	// Вспомогательные переменные для направления движения
 	const int directions[4][2] = {
 		{-1, -1}, {-1, 1}, {1, -1}, {1, 1}
 	};
 
+    // Определяем цвет противника
+	int opponent = (color == 1 || color == 3) ? 2 : 1;
+	int opponentKing = (opponent == 1) ? 3 : 4;
+
+	// Определяем цвет союзника
+	int teammates = (color == 1 || color == 3) ? 1 : 2;  // Союзник
+	int teammatesKing = (teammates == 1) ? 3 : 4;
+
+
 	std::vector<std::pair<int, int> > kill_moves;
 	if (isKing) {
+		int dx = 1, dy = 1;
+		bool directions_stop[4] = {false, false, false, false};
+		bool met_opponent_by_direction[4] = {false, false, false, false};
+		int dx_start[4] = {0, 0, 0, 0};
+		int dx_stop[4] = {0, 0, 0, 0};
+		while(dx <= 7) {
 
+			for (int d = 0; d < 4; d++) {
+				if (directions_stop[d]) {
+					continue;
+				}
+
+				int x_multiplyer = directions[d][0];
+				int y_multiplyer = directions[d][1];
+
+				int nx =  x + (x_multiplyer * dx);
+				int ny = y + (y_multiplyer * dx);
+
+				if (nx < 0 || nx >= 8 || ny < 0 || ny >= 8) {
+					directions_stop[d] = true;
+					dx_stop[d] = dx;
+					continue;
+				}
+
+				if (met_opponent_by_direction[d] && (dx_start[d] == 0 || dx_start[d] == 1)) {
+					dx_start[d] = dx;
+				}
+				if (this->matrix[nx][ny].first == teammates ||
+				this->matrix[nx][ny].first == teammatesKing) {
+					directions_stop[d] = true;
+					dx_stop[d] = dx;
+					continue;
+				} else if ((this->matrix[nx][ny].first == opponent ||
+				this->matrix[nx][ny].first == opponentKing) &&
+				 met_opponent_by_direction[d] == false) {
+					met_opponent_by_direction[d] = true;
+				} else if ((this->matrix[nx][ny].first == opponent ||
+				this->matrix[nx][ny].first == opponentKing) &&
+				met_opponent_by_direction[d] == true) {
+					dx_stop[d] = dx;
+					directions_stop[d] = true;
+					continue;
+				}
+				if (dx_start[d] == 0) {
+					dx_start[d] = 1;
+					dx_stop[d] = 1;
+				}
+			}
+			dx++;
+		}
+		// Восстановление ходов
+		for (int d = 0; d < 4; d++) {
+			if (dx_start[d] != dx_stop[d] && dx_start[d] != 0) {
+				for(int j = dx_start[d]; j < dx_stop[d]; j++) {
+					int x_multiplyer = directions[d][0];
+					int y_multiplyer = directions[d][1];
+
+					int nx =  x + (x_multiplyer * j);
+					int ny = y + (y_multiplyer * j);
+
+					if(dx_start[d] != 1 && dx_start[d] != 0) {
+						kill_moves.push_back(std::make_pair(nx,ny));
+
+					} else {
+						moves.push_back(std::make_pair(nx, ny));
+					}
+				}
+			}
+		}
 	} else {
 		// Логика для обычной пешки
 		int direction = (color == 1) ? -1 : 1; // Направление движения: белые вверх, черные вниз
@@ -98,6 +177,10 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 		this->is_last_kill_moves = true;
 		return kill_moves;
 
+	}
+	if(is_opponent_under_attack) {
+		this->is_last_kill_moves = false;
+		return std::vector<std::pair<int, int> > ();
 	}
 	this->is_last_kill_moves = false;
 	return moves;
@@ -152,7 +235,8 @@ std::pair<int, std::pair<int, int> > Logic::ReadMove(short color, short index, s
     if (!validMove) {
 		return std::pair<int, std::pair<int, int> >(false, std::pair<int, int>(-1, -1));
     }
-
+	// Проверка на дамку
+	bool isKing = (color == 3 || color == 4);
 	// Получаем текущие координаты шашки, которая движется
 	int x = this->last_i;
 	int y = this->last_j;
@@ -164,20 +248,24 @@ std::pair<int, std::pair<int, int> > Logic::ReadMove(short color, short index, s
 	output_pair.second = std::pair<int, int>(-1, -1);
 	// Проверка прыжка через шашку
 	bool is_attack = false;
-	if (abs(dx) == 1 && abs(dy) == 1) { // Прыжок через шашку
-		is_attack = true;
-        int mid_x = x + dx;
-		int mid_y = y + dy;
+	if (isKing) {
 
-		// Определяем цвет противника
-		int opponent = (color == 1 || color == 3) ? 2 : 1;
-		int opponentKing = (opponent == 1) ? 3 : 4;
+	} else {
+		if (abs(dx) == 1 && abs(dy) == 1) { // Прыжок через шашку
+			is_attack = true;
+			int mid_x = x + dx;
+			int mid_y = y + dy;
 
-        // Удаляем шашку противника с доски
-        if (this->matrix[mid_x][mid_y].first == opponent || this->matrix[mid_x][mid_y].first == opponentKing) {
-			// Очистить клетку с противником
-			output_pair.second = std::pair<int, int>(this->matrix[mid_x][mid_y].first, this->matrix[mid_x][mid_y].second);
-			this->matrix[mid_x][mid_y] = std::pair<int, int>(0, -1); // Убираем фигуру противника с доски
+			// Определяем цвет противника
+			int opponent = (color == 1 || color == 3) ? 2 : 1;
+			int opponentKing = (opponent == 1) ? 3 : 4;
+
+			// Удаляем шашку противника с доски
+			if (this->matrix[mid_x][mid_y].first == opponent || this->matrix[mid_x][mid_y].first == opponentKing) {
+				// Очистить клетку с противником
+				output_pair.second = std::pair<int, int>(this->matrix[mid_x][mid_y].first, this->matrix[mid_x][mid_y].second);
+				this->matrix[mid_x][mid_y] = std::pair<int, int>(0, -1); // Убираем фигуру противника с доски
+			}
 		}
 	}
 
@@ -240,12 +328,6 @@ bool Logic::isPieceUnderAttack(int x, int y, short color) {
 		{-1, -1}, {-1, 1},  // вверх-влево, вверх-вправо
 		{1, -1}, {1, 1}     // вниз-влево, вниз-вправо
 	};
-	const int black_attack_directions[2][2] = {
-			{-1, -1}, {-1, 1}
-		};
-	const int white_attack_directions[2][2] = {
-			{1, -1}, {1, 1}
-		};
 	int dx = 1, dy = 1;
 	bool directions_stop[4] = {false, false, false, false};
 	while(dx <= 7 && dy <= 7) {
@@ -281,17 +363,7 @@ bool Logic::isPieceUnderAttack(int x, int y, short color) {
 					if(abs(dx) == 1 && abs(dy) == 1 &&
 					 (this->matrix[nx][ny].first == opponent ||
 					 this->matrix[nx][ny].first == opponentKing)) {
-						if (this->matrix[nx][ny].first == 1 &&
-						 (d == 2 || d == 3)) {
-							return true;
-						} else if (this->matrix[nx][ny].first == 2 &&
-						 (d == 0 || d == 1)) {
-							return true;
-						} else if (this->matrix[nx][ny].first == 3 ||
-						 this->matrix[nx][ny].first == 4) {
-							return true;
-						}
-
+					 	return true;
 					} else if(this->matrix[nx][ny].first == opponentKing) {
 						return true;
 					}
