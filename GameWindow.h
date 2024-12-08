@@ -137,7 +137,7 @@ private:
 	Logic logic;	// User declarations
 	bool is_checked;
 	std::vector<TShape*> colored;
-	void Uncheck();
+	void Uncheck(); // Снятие выделения со всех шашек
 	std::pair<int, int> FormIndex(TShape *Shape);
 	TShape* CheckedFigure;
 	TShape* FindShape(AnsiString comp_name);
@@ -146,7 +146,7 @@ private:
 
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
-	void SetLogic(Logic logic);
+	void SetLogic(Logic logic); // Установка логики и формирование положения шашек
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;

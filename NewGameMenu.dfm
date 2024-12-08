@@ -1,9 +1,10 @@
 object Form2: TForm2
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'New Game'
-  ClientHeight = 312
-  ClientWidth = 408
+  ClientHeight = 322
+  ClientWidth = 418
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

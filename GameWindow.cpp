@@ -96,7 +96,7 @@ TShape* TForm3::FindShape(AnsiString comp_name) {
 
 }
 //---------------------------------------------------------------------------
-// Метод выделения фигуры для хода(Неокончательная версия)
+// Метод выделения фигуры для хода
 void __fastcall TForm3::FigureClick(TObject *Sender, TMouseButton Button,
       TShiftState Shift, int X, int Y)
 {
@@ -159,8 +159,7 @@ std::pair<int,int> TForm3::FormIndex(TShape *Shape) {
 	  return std::pair<int,int>(0, 0);
 }
 //---------------------------------------------------------------------------
-// Обработка хода на стороне UI и запрос к логике (Не окончено: нет дамок
-// и неправильно удаляются срубленные фигуры)
+// Обработка хода на стороне UI и запрос к логике
 void __fastcall TForm3::PlaceClick(TObject *Sender, TMouseButton Button,
 	  TShiftState Shift, int X, int Y)
 {
@@ -232,7 +231,7 @@ void __fastcall TForm3::N7Click(TObject *Sender)
 	Form4->ShowModal();
 }
 //---------------------------------------------------------------------------
-
+// Работа таймера
 void __fastcall TForm3::TimerEvent(TObject *Sender)
 {
 	bool is_white_move = Form3->logic.is_it_your_move(1);
@@ -254,12 +253,15 @@ void __fastcall TForm3::TimerEvent(TObject *Sender)
 
 }
 //---------------------------------------------------------------------------
+// Закрытие игры по окончанию
 void TForm3::EndGame() {
 	int winner = Form3->logic.didGameEnd();
 	winner = 1 ? MessageBox(NULL, "Белые победили поздравляем!!!", "", MB_OK) :
 	 MessageBox(NULL, "Черные победили поздравляем!!!", "", MB_OK);
 	Application->Terminate();
 }
+//---------------------------------------------------------------------------
+// Сохранение игры
 void __fastcall TForm3::N4Click(TObject *Sender)
 {
 	int Rc;
@@ -269,7 +271,7 @@ void __fastcall TForm3::N4Click(TObject *Sender)
 	Form3->Timer1->Enabled = true;
 }
 //---------------------------------------------------------------------------
-
+// Загрузка игры
 void __fastcall TForm3::N3Click(TObject *Sender)
 {
 	int Rc;

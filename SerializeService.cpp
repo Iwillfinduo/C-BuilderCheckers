@@ -23,7 +23,7 @@ void Serializer::SaveLogicObject (Logic logic, AnsiString path) {
 	out << move.c_str();
 	out << std::endl;
 
-	out << (int)logic.isExtraMove();
+	out << (int)logic.isExtraMove(); 
 	out << std::endl;
 	
 	out << AnsiString((int)logic.isTimer()).c_str() << std::endl;
