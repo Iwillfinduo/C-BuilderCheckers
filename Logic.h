@@ -26,6 +26,7 @@ class Logic {
 	  void SetBlackTimer(int seconds);
 	  bool isTimer();
 	  bool is_it_your_move(short color);
+	  std::vector<std::vector<std::pair<int,int> > > GetMatrix();
 
 	private:
 	  int timer_white;

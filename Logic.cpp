@@ -589,4 +589,15 @@ void Logic::SetBlackTimer(int seconds) {
 bool Logic::isTimer() {
 	return this->is_timer;
 }
+//---------------------------------------------------------------------------
+std::vector<std::vector<std::pair<int,int> > > Logic::GetMatrix() {
+	std::vector<std::vector<std::pair<int,int> > > out;
+	for (int i = 0; i < 8; i++) {
+		out.push_back(std::vector<std::pair<int, int> >());
+		for (int j = 0; j<8; j++) {
+			out[i].push_back(std::pair<int,int>(this->matrix[i][j].first, this->matrix[i][j].second));
+		}
+	}
+	return out;
+}
 #pragma package(smart_init)
