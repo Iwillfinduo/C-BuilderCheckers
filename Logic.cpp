@@ -86,7 +86,7 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 
 				if (nx < 0 || nx >= 8 || ny < 0 || ny >= 8) {
 					directions_stop[d] = true;
-					dx_stop[d] = met_opponent_by_direction[d] ? dx - 1 : dx ;
+					dx_stop[d] = dx - 1;
 					continue;
 				}
 
@@ -96,7 +96,7 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 				if (this->matrix[nx][ny].first == teammates ||
 				this->matrix[nx][ny].first == teammatesKing) {
 					directions_stop[d] = true;
-					dx_stop[d] = dx;
+					dx_stop[d] = dx - 1;
 					continue;
 				} else if ((this->matrix[nx][ny].first == opponent ||
 				this->matrix[nx][ny].first == opponentKing) &&
@@ -118,8 +118,8 @@ std::vector<std::pair<int, int> > Logic::GetMoves(short color, short index) {
 		}
 		// Восстановление ходов
 		for (int d = 0; d < 4; d++) {
-			if (dx_start[d] != dx_stop[d] && dx_start[d] != 0) {
-				for(int j = dx_start[d]; j < dx_stop[d]; j++) {
+			if (dx_start[d] != 0) {
+				for(int j = dx_start[d]; j <= dx_stop[d]; j++) {
 					int x_multiplyer = directions[d][0];
 					int y_multiplyer = directions[d][1];
 
@@ -387,7 +387,7 @@ bool Logic::isPieceUnderAttack(int x, int y, short color) {
 					if(abs(dx) == 1 && abs(dy) == 1 &&
 					 (this->matrix[nx][ny].first == opponent ||
 					 this->matrix[nx][ny].first == opponentKing)) {
-					 	return true;
+						return true;
 					} else if(this->matrix[nx][ny].first == opponentKing) {
 						return true;
 					}
@@ -599,5 +599,33 @@ std::vector<std::vector<std::pair<int,int> > > Logic::GetMatrix() {
 		}
 	}
 	return out;
+}
+//---------------------------------------------------------------------------
+Logic::Logic(std::vector<std::vector<std::pair<int,int> > > matrix, int move, int extra_move, int is_timer, int timer_white, int timer_black) {
+	this->black_count = 0;
+	this->white_count = 0;
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j<8; j++) {
+			this->matrix[i][j].first = matrix[i][j].first;
+			this->matrix[i][j].second = matrix[i][j].second;
+			if (matrix[i][j].first == 1 || matrix[i][j].first == 3) {
+				this->white_count++;
+
+			} else if (matrix[i][j].first == 2 || matrix[i][j].first == 4) {
+				this->black_count++;
+			}
+		}
+	}
+	this->is_extra_move = false;
+	this->is_timer = extra_move;
+	if (is_timer) {
+		this->timer_white = timer_white;
+		this->timer_black = timer_black;
+	}
+	this->is_white_move = move == 1 ? true : false;
+}
+//---------------------------------------------------------------------------
+bool Logic::isExtraMove() {
+	return this->is_extra_move;
 }
 #pragma package(smart_init)

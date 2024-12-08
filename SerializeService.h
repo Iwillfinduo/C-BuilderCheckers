@@ -4,11 +4,12 @@
 #define SerializeServiceH
 
 #include "Logic.h"
+#include <vcl.h>
 //---------------------------------------------------------------------------
 class Serializer {
   public:
-	void SaveLogicObject (Logic logic);
-	//Logic *LoadFromObject (AnsiString path);
+	void SaveLogicObject (Logic logic, AnsiString path);
+	Logic LoadFromObject (AnsiString path);
   private:
 };
 //---------------------------------------------------------------------------

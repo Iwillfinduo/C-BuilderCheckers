@@ -8,6 +8,7 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
+#include <Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -22,10 +23,12 @@ __published:	// IDE-managed Components
 	TShape *Shape2;
 	TShape *Shape3;
 	TShape *Shape4;
+	TOpenDialog *OpenDialog1;
 	void __fastcall ExitBtnClick(TObject *Sender);
 	void __fastcall AboutBtnClick(TObject *Sender);
 	void __fastcall NewGameBtnClick(TObject *Sender);
 	void __fastcall RulesBtnClick(TObject *Sender);
+	void __fastcall LoadBtnClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

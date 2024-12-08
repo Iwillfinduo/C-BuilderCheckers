@@ -7,6 +7,8 @@
 #include "ABOUT.h"
 #include "Rules.h"
 #include "NewGameMenu.h"
+#include "GameWindow.h"
+#include "SerializeService.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -35,6 +37,18 @@ void __fastcall TForm1::NewGameBtnClick(TObject *Sender)
 void __fastcall TForm1::RulesBtnClick(TObject *Sender)
 {
 	Form4->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::LoadBtnClick(TObject *Sender)
+{
+	int Rc;
+	Rc = OpenDialog1->Execute();
+	if (Rc) {
+		Form3->SetLogic(Serializer().LoadFromObject(OpenDialog1->FileName));
+		Form3->Show();
+		Form1->Hide();
+	}
 }
 //---------------------------------------------------------------------------
 

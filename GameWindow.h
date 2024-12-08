@@ -11,6 +11,8 @@
 #include <Menus.hpp>
 #include <Graphics.hpp>
 #include "Logic.h"
+#include "SerializeService.h"
+#include <Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -115,6 +117,8 @@ __published:	// IDE-managed Components
 	TShape *EB11;
 	TLabel *Label2;
 	TTimer *Timer1;
+	TSaveDialog *SaveDialog1;
+	TOpenDialog *OpenDialog1;
 	void __fastcall S21ContextPopup(TObject *Sender, TPoint &MousePos,
           bool &Handled);
 	void __fastcall TimerIMGClick(TObject *Sender);
@@ -127,6 +131,8 @@ __published:	// IDE-managed Components
 	void __fastcall N8Click(TObject *Sender);
 	void __fastcall N7Click(TObject *Sender);
 	void __fastcall TimerEvent(TObject *Sender);
+	void __fastcall N4Click(TObject *Sender);
+	void __fastcall N3Click(TObject *Sender);
 private:
 	Logic logic;	// User declarations
 	bool is_checked;
@@ -136,6 +142,8 @@ private:
 	TShape* CheckedFigure;
 	TShape* FindShape(AnsiString comp_name);
 	void EndGame();
+	Serializer serializer;
+
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
 	void SetLogic(Logic logic);

@@ -157,6 +157,7 @@
         <FILE FILENAME="Logic.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="Logic" FORMNAME="" DESIGNCLASS="" ADDITIONAL="Logic.h"/>
         <FILE FILENAME="GameWindow.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="GameWindow" FORMNAME="Form3" DESIGNCLASS="" ADDITIONAL="GameWindow.h"/>
         <FILE FILENAME="Rules.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="Rules" FORMNAME="Form4" DESIGNCLASS="" ADDITIONAL="Rules.h"/>
+        <FILE FILENAME="SerializeService.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="SerializeService" FORMNAME="" DESIGNCLASS="" ADDITIONAL="SerializeService.h"/>
       </FILELIST>
       <IDEOPTIONS>
         <VersionInfo>

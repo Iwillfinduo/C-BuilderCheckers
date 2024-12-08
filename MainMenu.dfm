@@ -89,6 +89,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    OnClick = LoadBtnClick
   end
   object RulesBtn: TButton
     Left = 72
@@ -134,5 +135,12 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 4
     OnClick = ExitBtnClick
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = 'check'
+    Filter = 'Checkers Save file .check|*.check'
+    Title = #1047#1072#1075#1088#1091#1079#1082#1072' '#1080#1075#1088#1099
+    Left = 280
+    Top = 320
   end
 end

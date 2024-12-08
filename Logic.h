@@ -12,6 +12,7 @@ class Logic {
 	public:
 	  Logic() {}
 	  Logic(int timer);
+	  Logic(std::vector<std::vector<std::pair<int,int> > > matrix, int move, int extra_move, int is_timer, int timer_white, int timer_black);
 	  //int StartTimer();
 	  //int StopTimer();
 	  std::vector<std::pair<int, int> > GetMoves(short color, short index);
@@ -26,6 +27,7 @@ class Logic {
 	  void SetBlackTimer(int seconds);
 	  bool isTimer();
 	  bool is_it_your_move(short color);
+	  bool isExtraMove();
 	  std::vector<std::vector<std::pair<int,int> > > GetMatrix();
 
 	private:

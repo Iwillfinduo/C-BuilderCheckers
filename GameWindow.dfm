@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = #1048#1075#1088#1072
-  ClientHeight = 529
-  ClientWidth = 635
+  ClientHeight = 549
+  ClientWidth = 642
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -33278,8 +33278,8 @@ object Form3: TForm3
   end
   object EW8: TShape
     Tag = 8
-    Left = 24
-    Top = 408
+    Left = 760
+    Top = 376
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33287,8 +33287,8 @@ object Form3: TForm3
   end
   object EW9: TShape
     Tag = 9
-    Left = 136
-    Top = 408
+    Left = 872
+    Top = 376
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33296,8 +33296,8 @@ object Form3: TForm3
   end
   object EW10: TShape
     Tag = 10
-    Left = 248
-    Top = 408
+    Left = 984
+    Top = 376
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33305,8 +33305,8 @@ object Form3: TForm3
   end
   object EW11: TShape
     Tag = 11
-    Left = 360
-    Top = 408
+    Left = 1096
+    Top = 376
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33314,8 +33314,8 @@ object Form3: TForm3
   end
   object EW4: TShape
     Tag = 4
-    Left = 80
-    Top = 352
+    Left = 816
+    Top = 320
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33323,8 +33323,8 @@ object Form3: TForm3
   end
   object EW5: TShape
     Tag = 5
-    Left = 192
-    Top = 352
+    Left = 928
+    Top = 320
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33332,8 +33332,8 @@ object Form3: TForm3
   end
   object EW6: TShape
     Tag = 6
-    Left = 304
-    Top = 352
+    Left = 1040
+    Top = 320
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33341,16 +33341,16 @@ object Form3: TForm3
   end
   object EW7: TShape
     Tag = 7
-    Left = 416
-    Top = 352
+    Left = 1152
+    Top = 320
     Width = 57
     Height = 57
     Shape = stEllipse
     OnMouseDown = FigureClick
   end
   object EW0: TShape
-    Left = 24
-    Top = 296
+    Left = 760
+    Top = 264
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33358,8 +33358,8 @@ object Form3: TForm3
   end
   object EW1: TShape
     Tag = 1
-    Left = 136
-    Top = 296
+    Left = 872
+    Top = 264
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33367,8 +33367,8 @@ object Form3: TForm3
   end
   object EW2: TShape
     Tag = 2
-    Left = 248
-    Top = 296
+    Left = 984
+    Top = 264
     Width = 57
     Height = 57
     Shape = stEllipse
@@ -33376,16 +33376,16 @@ object Form3: TForm3
   end
   object EW3: TShape
     Tag = 3
-    Left = 360
-    Top = 296
+    Left = 1096
+    Top = 264
     Width = 57
     Height = 57
     Shape = stEllipse
     OnMouseDown = FigureClick
   end
   object EB0: TShape
-    Left = 80
-    Top = 16
+    Left = 816
+    Top = -16
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33394,8 +33394,8 @@ object Form3: TForm3
   end
   object EB4: TShape
     Tag = 4
-    Left = 24
-    Top = 72
+    Left = 760
+    Top = 40
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33404,8 +33404,8 @@ object Form3: TForm3
   end
   object EB5: TShape
     Tag = 5
-    Left = 136
-    Top = 72
+    Left = 872
+    Top = 40
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33414,8 +33414,8 @@ object Form3: TForm3
   end
   object EB1: TShape
     Tag = 1
-    Left = 192
-    Top = 16
+    Left = 928
+    Top = -16
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33424,8 +33424,8 @@ object Form3: TForm3
   end
   object EB6: TShape
     Tag = 6
-    Left = 248
-    Top = 72
+    Left = 984
+    Top = 40
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33434,8 +33434,8 @@ object Form3: TForm3
   end
   object EB2: TShape
     Tag = 2
-    Left = 304
-    Top = 16
+    Left = 1040
+    Top = -16
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33444,8 +33444,8 @@ object Form3: TForm3
   end
   object EB7: TShape
     Tag = 7
-    Left = 360
-    Top = 72
+    Left = 1096
+    Top = 40
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33454,8 +33454,8 @@ object Form3: TForm3
   end
   object EB3: TShape
     Tag = 3
-    Left = 416
-    Top = 16
+    Left = 1152
+    Top = -16
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33464,8 +33464,8 @@ object Form3: TForm3
   end
   object EB8: TShape
     Tag = 8
-    Left = 80
-    Top = 128
+    Left = 816
+    Top = 96
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33474,8 +33474,8 @@ object Form3: TForm3
   end
   object EB9: TShape
     Tag = 9
-    Left = 192
-    Top = 128
+    Left = 928
+    Top = 96
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33484,8 +33484,8 @@ object Form3: TForm3
   end
   object EB10: TShape
     Tag = 10
-    Left = 304
-    Top = 128
+    Left = 1040
+    Top = 96
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33494,8 +33494,8 @@ object Form3: TForm3
   end
   object EB11: TShape
     Tag = 11
-    Left = 416
-    Top = 128
+    Left = 1152
+    Top = 96
     Width = 57
     Height = 57
     Brush.Color = clBlack
@@ -33518,9 +33518,11 @@ object Form3: TForm3
       end
       object N3: TMenuItem
         Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100
+        OnClick = N3Click
       end
       object N4: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        OnClick = N4Click
       end
       object N5: TMenuItem
         Caption = #1042#1099#1093#1086#1076
@@ -33543,5 +33545,19 @@ object Form3: TForm3
     OnTimer = TimerEvent
     Left = 560
     Top = 456
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = 'check'
+    Filter = 'Checkers Save file .check|*.check'
+    Title = #1057#1086#1093#1088#1072#1085#1077#1085#1080#1077' '#1080#1075#1088#1099
+    Left = 576
+    Top = 416
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = 'check'
+    Filter = 'Checkers Save file .check|*.check'
+    Title = #1047#1072#1075#1088#1091#1079#1082#1072' '#1080#1075#1088#1099
+    Left = 536
+    Top = 416
   end
 end

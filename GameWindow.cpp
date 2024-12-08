@@ -18,6 +18,7 @@ TForm3 *Form3;
 __fastcall TForm3::TForm3(TComponent* Owner)
 	: TForm(Owner)
 {
+	Form3->serializer = Serializer();
 }
 //---------------------------------------------------------------------------
 // Logic Setter(for parent form)
@@ -26,11 +27,44 @@ void TForm3::SetLogic(Logic logic){
 	if(logic.isTimer()) {
 		Form3->Timer1->Enabled = true;
 	}
+	std::vector<std::vector<std::pair<int,int> > > matrix = logic.GetMatrix();
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (matrix[i][j].first != 0) {
+				AnsiString comp_name;
+				comp_name =  "E";
+
+				if (matrix[i][j].first == 1 || matrix[i][j].first == 3) {
+					comp_name += "W";
+				} else if(matrix[i][j].first == 2 || matrix[i][j].first == 4) {
+					comp_name += "B";
+				}
+				comp_name += matrix[i][j].second;
+				if (matrix[i][j].second < 12 && matrix[i][j].second > -1) {
+					TShape *fig = Form3->FindShape(comp_name);
+					TShape *place = Form3->FindShape(AnsiString("S") + i + j);
+					fig->Left = place->Left;
+					fig->Top = place->Top;
+					if (matrix[i][j].first == 3 || matrix[i][j].first == 4) {
+						if (fig->Brush->Color == clBlack) {
+
+						} else {
+							fig->Pen->Color = clWhite;
+						}
+						fig->Brush->Style = bsClear;
+						fig->Pen->Width = 20;
+						fig->Name[1] = 'K';
+					}
+				}
+
+			}
+		}
+	}
 }
 void __fastcall TForm3::S21ContextPopup(TObject *Sender, TPoint &MousePos,
       bool &Handled)
 {
-	Form3->Label1->Caption = "Clicked";
+	//Form3->Label1->Caption = "Clicked";
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm3::TimerIMGClick(TObject *Sender)
@@ -176,6 +210,7 @@ void __fastcall TForm3::PlaceClick(TObject *Sender, TMouseButton Button,
 	Form3->Uncheck();
 	if (Form3->logic.didGameEnd()) {
 		Form3->EndGame();
+    	Form3->Timer1->Enabled;
 	}
 }
 //---------------------------------------------------------------------------
@@ -225,3 +260,28 @@ void TForm3::EndGame() {
 	 MessageBox(NULL, "Черные победили поздравляем!!!", "", MB_OK);
 	Application->Terminate();
 }
+void __fastcall TForm3::N4Click(TObject *Sender)
+{
+	int Rc;
+	Form3->Timer1->Enabled = false;
+	Rc = SaveDialog1->Execute();	if (Rc) {		Form3->serializer.SaveLogicObject(logic, SaveDialog1->FileName);
+	}
+	Form3->Timer1->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::N3Click(TObject *Sender)
+{
+	int Rc;
+	Rc = OpenDialog1->Execute();
+	if (Rc) {
+
+		TForm3 *old = Form3;
+		Form3 = new TForm3(old->Owner);
+		Form3->SetLogic(Form3->serializer.LoadFromObject(OpenDialog1->FileName));
+		Form3->Show();
+		old->Free();
+	}
+}
+//---------------------------------------------------------------------------
+
