@@ -23,6 +23,9 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 // Logic Setter(for parent form)
 void TForm3::SetLogic(Logic logic){
 	Form3->logic = logic;
+	if(logic.isTimer()) {
+		Form3->Timer1->Enabled = true;
+	}
 }
 void __fastcall TForm3::S21ContextPopup(TObject *Sender, TPoint &MousePos,
       bool &Handled)
@@ -68,18 +71,6 @@ void __fastcall TForm3::FigureClick(TObject *Sender, TMouseButton Button,
 		// Формирование запроса к logic для получения доступных ходов
 		std::pair<int, int> color_index_pair = this->FormIndex((TShape *)Sender);
 		std::vector<std::pair<int, int> > moves = Form3->logic.GetMoves(color_index_pair.first, color_index_pair.second);
-
-		//debug вывод для отладки GetMoves
-		AnsiString moves_string = "";
-		moves_string = moves.size();
-		for (int i = 0; i < moves.end() - moves.begin(); i++) {
-			moves_string += "(";
-			moves_string += moves[i].first;
-			moves_string += ",";
-			moves_string += moves[i].second;
-			moves_string += ")\n";
-		}
-		Form3->Label1->Caption = moves_string;
 
 		//Покраска полей куда можно сделать ход
 		for (int i = 0; i < moves.end() - moves.begin(); i++) {
@@ -148,10 +139,16 @@ void __fastcall TForm3::PlaceClick(TObject *Sender, TMouseButton Button,
 		  place_index.first, place_index.second);
 		if (move_pair.first) {
 			if (move_pair.second.first != -1) {
-				AnsiString comp_name = "E";
-				if (move_pair.second.first == 1) {
+				AnsiString comp_name;
+				if (move_pair.second.first == 1 || move_pair.second.first == 2) {
+					comp_name =  "E";
+				} else {
+					comp_name =  "K";
+				}
+
+				if (move_pair.second.first == 1 || move_pair.second.first == 3) {
 					comp_name += "W";
-				} else if(move_pair.second.first == 2) {
+				} else if(move_pair.second.first == 2 || move_pair.second.first == 4) {
 					comp_name += "B";
 				}
 				comp_name += move_pair.second.second;
@@ -177,6 +174,9 @@ void __fastcall TForm3::PlaceClick(TObject *Sender, TMouseButton Button,
 		}
 	}
 	Form3->Uncheck();
+	if (Form3->logic.didGameEnd()) {
+		Form3->EndGame();
+	}
 }
 //---------------------------------------------------------------------------
 //Кнопка меню - Выход
@@ -198,3 +198,30 @@ void __fastcall TForm3::N7Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm3::TimerEvent(TObject *Sender)
+{
+	bool is_white_move = Form3->logic.is_it_your_move(1);
+	int timer = is_white_move ? Form3->logic.GetWhiteTimer() : Form3->logic.GetBlackTimer();
+	if(timer > 0 ) {
+		--timer;
+		AnsiString move = is_white_move ? "Белые \n": "Черные \n";
+		AnsiString timer_str = AnsiString().sprintf("%02d:%02d",(int)(timer / 60), (int)(timer % 60));
+		Form3->Label2->Caption = move + timer_str;
+		is_white_move ? Form3->logic.SetWhiteTimer(timer) : Form3->logic.SetBlackTimer(timer);
+		if (Form3->logic.didGameEnd()) {
+			Form3->Timer1->Enabled = false;
+			Form3->EndGame();
+		}
+		Application->ProcessMessages();
+	} else {
+		Form3->Timer1->Enabled = false;
+	}
+
+}
+//---------------------------------------------------------------------------
+void TForm3::EndGame() {
+	int winner = Form3->logic.didGameEnd();
+	winner = 1 ? MessageBox(NULL, "Белые победили поздравляем!!!", "", MB_OK) :
+	 MessageBox(NULL, "Черные победили поздравляем!!!", "", MB_OK);
+	Application->Terminate();
+}

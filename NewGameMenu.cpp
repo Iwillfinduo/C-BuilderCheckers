@@ -21,16 +21,16 @@ void __fastcall TForm2::BitBtn1Click(TObject *Sender)
 	int timer;
 	switch (Form2->ComboBox1->ItemIndex) {
 		case 0:
-			timer = 0;
+			timer = 0 * 60;
 			break;
 		case 1:
-			timer = 5;
+			timer = 5 * 60;
 			break;
 		case 2:
-			timer = 15;
+			timer = 15 * 60;
 			break;
 		case 3:
-			timer = 45;
+			timer = 45 * 60;
 			break;
 	}
 	Logic logic = Logic(timer);

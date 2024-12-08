@@ -113,7 +113,8 @@ __published:	// IDE-managed Components
 	TShape *EB9;
 	TShape *EB10;
 	TShape *EB11;
-	TLabel *Label1;
+	TLabel *Label2;
+	TTimer *Timer1;
 	void __fastcall S21ContextPopup(TObject *Sender, TPoint &MousePos,
           bool &Handled);
 	void __fastcall TimerIMGClick(TObject *Sender);
@@ -125,6 +126,7 @@ __published:	// IDE-managed Components
 	void __fastcall N5Click(TObject *Sender);
 	void __fastcall N8Click(TObject *Sender);
 	void __fastcall N7Click(TObject *Sender);
+	void __fastcall TimerEvent(TObject *Sender);
 private:
 	Logic logic;	// User declarations
 	bool is_checked;
@@ -133,6 +135,7 @@ private:
 	std::pair<int, int> FormIndex(TShape *Shape);
 	TShape* CheckedFigure;
 	TShape* FindShape(AnsiString comp_name);
+	void EndGame();
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
 	void SetLogic(Logic logic);

@@ -2,7 +2,7 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = #1048#1075#1088#1072
-  ClientHeight = 509
+  ClientHeight = 529
   ClientWidth = 635
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -12,6 +12,7 @@ object Form3: TForm3
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poDesigned
   OnCloseQuery = CloseMain
   PixelsPerInch = 96
   TextHeight = 13
@@ -33501,12 +33502,11 @@ object Form3: TForm3
     Shape = stEllipse
     OnMouseDown = FigureClick
   end
-  object Label1: TLabel
-    Left = 586
-    Top = 312
-    Width = 31
+  object Label2: TLabel
+    Left = 576
+    Top = 104
+    Width = 3
     Height = 13
-    Caption = 'Label1'
   end
   object MainMenu1: TMainMenu
     Left = 600
@@ -33538,5 +33538,10 @@ object Form3: TForm3
         OnClick = N8Click
       end
     end
+  end
+  object Timer1: TTimer
+    OnTimer = TimerEvent
+    Left = 560
+    Top = 456
   end
 end
